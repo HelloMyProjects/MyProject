@@ -17,4 +17,8 @@ public class IndexController {
 		return "/template";
 	}
 	
+	@GetMapping("/pic")
+	public String pic() {
+		return "/pic";
+	}
 }
