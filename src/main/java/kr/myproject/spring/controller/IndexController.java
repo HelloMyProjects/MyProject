@@ -12,6 +12,7 @@ public class IndexController {
 		return "/index";
 	}
 	
+	
 	@GetMapping("/template")
 	public String main() {
 		return "/template";
