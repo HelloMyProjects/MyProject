@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.loginContainer{
+	margin: 100px;
+	text-align: center;
+	
+}
+
+.loginInput{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width:300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
+
+.loginForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center
+}
+
+.inputForm{
+	display:flex;
+	flex-direction: column;
+	display:flex;
+}
+
+.loginTitle{
+	padding-bottom: 50px;
+	
+}
+
+.findPW, .findID, .join{
+	text-decoration: none;
+	color: black;
+	margin:10px;
+}
+
+.loginhr{
+	width:50%;
+	margin-left : auto;
+  	margin-right : auto;
+}
+
+.loginOther {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}

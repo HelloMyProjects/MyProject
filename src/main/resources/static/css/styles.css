@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import "login.css";
+
 html {
     position: relative;
     min-height: 100%;
