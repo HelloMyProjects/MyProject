@@ -15,7 +15,7 @@ import kr.myproject.spring.member.entity.Member;
 import kr.myproject.spring.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
-@RequestMapping("/members")
+@RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
