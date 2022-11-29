@@ -22,9 +22,16 @@ public class IndexController {
 	public String pic() {
 		return "/pic";
 	}
+
+	@GetMapping("/board/boardWrite")
+	public String boardWrite() {
+		return "board/boardWrite";
+	}
 	
 	@GetMapping("/login")
 	public String login() {
 		return "/login";
 	}
+	
+	
 }

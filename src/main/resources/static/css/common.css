@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+
+:root {
+	--maincolor : #5DAAD4;
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+ 
+}
+
+.container_frame{
+	width: 1450px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 100px;
+    position: relative;
+}
+
+.content{
+	padding-left: 100px;
+}
+
