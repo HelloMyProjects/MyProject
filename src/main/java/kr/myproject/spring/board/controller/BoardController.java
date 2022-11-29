@@ -29,11 +29,7 @@ public class BoardController {
 
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+username);
 		model.addAttribute("username", username);
-		Board board = new Board();
 		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		System.out.println(board);
-		boardService.saveBoard(board);
 		return "board/boardWrite";
 	}
 	
