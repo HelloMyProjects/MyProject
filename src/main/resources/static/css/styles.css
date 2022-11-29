@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
-@import "login.css";
-
-html {
+/* html {
     position: relative;
     min-height: 100%;
     margin: 0;
@@ -22,13 +19,12 @@ body {
 }
 .content{
     margin-bottom:100px;
-    /* margin-top: 50px;
+    margin-top: 50px;
     margin-left: 200px;
-    margin-right: 200px; */
-}
-=======
+    margin-right: 200px;
+} */
+@import "login.css";
 @import "bootstrap.css";
->>>>>>> branch 'main' of https://github.com/HelloMyProjects/MyProject.git
 
 @import "common.css";
 @import "boardWrite.css";
