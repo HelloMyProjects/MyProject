@@ -1,5 +1,7 @@
 package kr.myproject.spring.board.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,8 +41,15 @@ public class Board {
 	private String member;
 	
 	@Column(name = "REGDATE")
-	private String regdate;
+	private LocalDateTime regdate;
 	
 	@Column(name = "VIEWCNT")
 	private int viewcnt;
+	
+	@Column(name = "PHOTO", length = 100000000)
+	private String photo;
+	
+	@Column(name="TEXT", length = 100000000)
+	private String text;
+	
 }

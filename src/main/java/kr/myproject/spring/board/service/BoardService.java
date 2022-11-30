@@ -16,6 +16,10 @@ public class BoardService {
 	@Autowired
 	BoardRepository repository;
 	
+	public void boardInsert(Board list) {
+		 Board itemList = repository.save(list);
+	}
+	
 	public void saveBoard(Board board) {
 		repository.save(board);
 	}

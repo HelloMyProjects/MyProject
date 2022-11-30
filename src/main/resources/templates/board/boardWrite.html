@@ -29,7 +29,8 @@
 				    // 줄간격
 				    ['height', ['height']],
 				    // 그림첨부, 링크만들기, 동영상첨부
-				    ['insert',['picture','link','video']],
+				    ['insert',['picture']],
+				    //'link','video'
 				  ],
 				  // 추가한 글꼴
 				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
@@ -95,7 +96,7 @@
 	        	console.log(textsss);
 	            var form1 = $("#form").serializeArray(false);
 	            var form2 = $("#form").serialize();
-	            var contents = form1[3].value;
+	            var contents = form1[1].value;
 	            console.log(contents);
 	            const reg = /<[^>]*>?/g
 	        	var text = contents.replace(reg," ");	
@@ -120,6 +121,8 @@
 	            });
 	        });
 	    });
+		
+		
 		
 		
 		/**
@@ -150,7 +153,6 @@
 </head>
 <!-- 여기서부터 content 붙여넣기 -->
 	<div layout:fragment="content">
-        <h2>기사 쓰기</h2>
 	    	<form id="form" name="form" method="post" action="/manager/boardInsert" enctype="multipart/form-data">
 	    		
 	    		<table class="board_detail">
