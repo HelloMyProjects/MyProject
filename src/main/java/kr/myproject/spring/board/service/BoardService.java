@@ -1,6 +1,7 @@
 package kr.myproject.spring.board.service;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -24,5 +25,8 @@ public class BoardService {
 		repository.save(board);
 	}
 
-	
+	public List<Board> findFirst4ByOrderByIdDesc() {
+		List<Board> board = repository.findFirst7ByOrderByIdDesc();
+		return board;
+	}
 }

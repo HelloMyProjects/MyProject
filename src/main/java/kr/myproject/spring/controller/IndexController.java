@@ -1,17 +1,30 @@
 package kr.myproject.spring.controller;
 
 
-import java.security.Principal;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.myproject.spring.board.entity.Board;
+import kr.myproject.spring.board.service.BoardService;
 
 @Controller
 public class IndexController {
 	
-	@GetMapping("/index")
-	public String index(Principal principal) {
-		System.out.println(">>>>>>>>>>>>>>>>>>."+principal);
+	@Autowired
+	BoardService boardService;
+	
+	@GetMapping(value = {"/", "/index"})
+	public String index(Model model) {
+		List<Board> board =  boardService.findFirst4ByOrderByIdDesc();
+		for (int i = 0; i < board.size(); i++) {
+			System.out.println(">>>>>>>>>>>>>>."+board.get(i).getId());
+		}
+		
+		model.addAttribute("board", board);
 		return "/index";
 	}
 	

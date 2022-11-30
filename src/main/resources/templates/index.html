@@ -58,18 +58,20 @@
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="col-lg-4 col-sm-6 mb-4" th:if="${!#lists.isEmpty(board)}"
+							th:each="board: ${board}">
                         <!-- Portfolio item 1-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="/pic">
+                            <a class="portfolio-link" data-bs-toggle="modal" th:href="|#portfolioModal${board.id}|">
+                            	<h1 th:text="${board.id}"></h1>
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content">
                                     <i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="/img/portfolio/1.jpg" alt="..." />
+                                <img class="img-fluid" th:src="${board.photo}" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Threads</div>
+                                <div class="portfolio-caption-heading" th:text="${board.title}">Threads</div>
                                 <div class="portfolio-caption-subheading text-muted">Illustration</div>
                             </div>
                         </div>
@@ -149,6 +151,7 @@
                             </div>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </section>
@@ -156,7 +159,7 @@
         
         <!-- Portfolio Modals-->
         <!-- Portfolio item 1 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="/img/close-icon.svg" alt="Close modal" /></div>
@@ -164,7 +167,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
+                                    Project details
                                     <h2 class="text-uppercase">Project Name</h2>
                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                                     <img class="img-fluid d-block mx-auto" src="/img/portfolio/1.jpg" alt="..." />
@@ -189,10 +192,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Portfolio item 2 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="portfolio-modal modal fade"  tabindex="-1" role="dialog" aria-hidden="true"
+        	th:if="${!#lists.isEmpty(board)}" th:each="board: ${board}" th:id="|portfolioModal${board.id}|">
+            <div class="modal-dialog"> 
                 <div class="modal-content">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="/img/close-icon.svg" alt="Close modal" /></div>
                     <div class="container">
