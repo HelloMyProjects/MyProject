@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<!-- 여기서부터 content 붙여넣기 -->
+	<div layout:fragment="content">
+		<h1 th:text="${board.title}"></h1>
+		<div th:text="${board.member}"></div>
+		<div th:text="|작성일 ${#temporals.format(board.regdate, 'yyyy년 MM월 dd일')}|"></div>
+		<div th:text="|조회수 ${board.viewcnt}|"></div>
+		<hr>
+		<div th:utext="${board.contents}"></div>
+		
+    </div>
+    
+	
+	
+</html>

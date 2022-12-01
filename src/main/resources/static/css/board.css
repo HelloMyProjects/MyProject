@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.project-title{
+	
+}
+
+.project-info{
+	color: black;
+	text-decoration-line: none;
+}
+
+.project-info:hover{
+	color: #a2a3a6;
+}

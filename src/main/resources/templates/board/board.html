@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<!-- 여기서부터 content 붙여넣기 -->
+	<div layout:fragment="content">
+        <div class="new_board_r">
+			<!-- <div class="news_board_r1"> -->
+				<div class="picture_bottom">
+					<div class="picture_list" th:if="${!#lists.isEmpty(board)}"
+							th:each="board : ${board}">
+						<div class="picture_list_img">
+						<a class="open-modal project-info" href="/board/boardDetail?id=" th:attrappend="href=${board.id}">
+							<img th:src="${board.photo}" class="img-fluid" >
+							<h5 class="project-title" th:text="${board.title}"></h5>
+						</a>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+        
+    </div>
+
+</html>
