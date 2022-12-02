@@ -4,7 +4,9 @@
       layout:decorate="layout/default">
       
 <head>
+	
 	<script>
+		var textsss = "";
 		$(document).ready(function() {
 		  $("#summernote").summernote({
 	 	    	placeholder: '입력해 주세요',
@@ -93,32 +95,47 @@
 		
 		$(function(){
 	        $('#submit').on("click",function () {
-	        	console.log(textsss);
 	            var form1 = $("#form").serializeArray(false);
 	            var form2 = $("#form").serialize();
-	            var contents = form1[1].value;
-	            console.log(contents);
-	            const reg = /<[^>]*>?/g
-	        	var text = contents.replace(reg," ");	
-	            form2 += "&text="+ textsss;
-	            console.log(form2);
-	            console.log(textsss);
-	            
-	            $.ajax({
-	                type: "post",
-	                url: "/manager/boardInsert",
-	                data: form2,
-	                dataType: 'json',
-	                success: function (form2) {
-	                    alert("success");
-	                    console.log(form2);
-	                    //window.location.href = "/manager/manager";
-	                },
-	                error: function (request, status, error) {
-	                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            var contents = form1[2].value;
+	            console.log(form1);
+	            //[0]: title , [1] : simpleinfo, [2] : contents
+            	if(!form1[0].value||!form1[1].value||!form1[2].value){
+            		alert("내용을 모두 입력해주세요.");
+            		var title = $(".project-title");
+            		var info = $(".project-simpleinfo");
+            		var my_contents = $('#summernote');
+            		if(!form1[0].value){
+            			title.focus();
+            		} 
+            		else if(!form1[1].value){
+            			info.focus();
+            		}
+            		if (my_contents.summernote('isEmpty')) {
+            			my_contents.focus();
+                    }
+            	}else{
+    	            const reg = /<[^>]*>?/g
+    	        	var text = contents.replace(reg," ");	
+    	            form2 += "&text="+ textsss;
+    	            console.log(form2);
+    	            $.ajax({
+    	                type: "post",
+    	                url: "/board/boardInsert",
+    	                data: form2,
+    	                dataType: 'json',
+    	                success: function (form2) {
+    	                    alert("success");
+    	                    console.log(form2);
+    	                    window.location.href = "/board/board";
+    	                },
+    	                error: function (request, status, error) {
+    	                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 
-	                }
-	            });
+    	                }
+    	            });
+            	}
+	            
 	        });
 	    });
 		
@@ -153,20 +170,25 @@
 </head>
 <!-- 여기서부터 content 붙여넣기 -->
 	<div layout:fragment="content">
-	    	<form id="form" name="form" method="post" action="/manager/boardInsert" enctype="multipart/form-data">
+	    	<form id="form" name="form" method="post" action="/board/boardInsert" 
+	    	enctype="multipart/form-data">
 	    		
 	    		<table class="board_detail">
 					<tr>
 						<td>제목</td>
-						<td><input type="text" id="title" name="title"/></td>
+						<td><input type="text" class="project-title" id="title" name="title" /></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
 						<td th:text = "${username}"></td>
 					</tr>
 					<tr>
+						<td>한줄 소개</td>
+						<td><input type="text" class="project-simpleinfo" id="simpleInfo" name="simpleInfo"/></td>
+					</tr>
+					<tr>
 						<td colspan="4">
-							<textarea id="summernote" name="contents"></textarea>
+							<textarea id="summernote" class="project-contents" name="contents" ></textarea>
 						</td>
 						
 					</tr>
@@ -178,6 +200,11 @@
 					<button type="button" id="submit" value="저장" class="btn btn-outline-primary">저장</button>
 				</div>
         </form>
+        
     </div>
 
+	
+	
+	    
+	
 </html>

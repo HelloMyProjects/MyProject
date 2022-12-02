@@ -38,7 +38,6 @@ public class BoardController {
 
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+username);
 		model.addAttribute("username", username);
-		
 		return "board/boardWrite";
 	}
 	
@@ -49,7 +48,7 @@ public class BoardController {
 		return "board/board";
 	}
 	
-	@PostMapping("/manager/boardInsert")
+	@PostMapping("/board/boardInsert")
 	@ResponseBody
 	public ResponseEntity boardInsert(Board board, Principal principal) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>board:"+board);

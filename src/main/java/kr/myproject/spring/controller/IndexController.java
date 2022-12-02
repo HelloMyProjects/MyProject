@@ -20,10 +20,6 @@ public class IndexController {
 	@GetMapping(value = {"/", "/index"})
 	public String index(Model model) {
 		List<Board> board =  boardService.findFirst4ByOrderByIdDesc();
-		for (int i = 0; i < board.size(); i++) {
-			System.out.println(">>>>>>>>>>>>>>."+board.get(i).getId());
-		}
-		
 		model.addAttribute("board", board);
 		return "/index";
 	}

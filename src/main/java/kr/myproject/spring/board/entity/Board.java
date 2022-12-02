@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,5 +53,8 @@ public class Board {
 	
 	@Column(name="TEXT", length = 100000000)
 	private String text;
+	
+	@Column(name="SIMPLE_INFO")
+	private String simpleInfo;
 	
 }
