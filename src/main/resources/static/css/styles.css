@@ -31,3 +31,12 @@ body {
 @import "picture.css";
 @import "board.css";
 
+.modal-project-title{
+	color: black;
+	text-decoration-line: none;
+}
+
+.modal-project-title:hover{
+	color: #a2a3a6;
+}
+
