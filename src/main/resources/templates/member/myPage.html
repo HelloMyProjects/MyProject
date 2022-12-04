@@ -17,14 +17,7 @@
         <a th:href = "${member.giturl}" >
         	<i class="fa-solid fa-link"></i>
         </a>
-        <form id="myform" name="myform" method="post" action="/member/myPage" >
-        	
-        	<input class="myinfos introduce" th:value="${member.myinfo}" name="myinfo" type="text" placeholder="나를 소개해보세요"/><p/>
-        	<input class="myinfos github-url" th:value="${member.giturl}" name ="giturl" type="url" placeholder="깃허브 주소를 입력해주세요"/>
-        	<p/>
-        	
-        	<input class="info-save" type="submit" value="save">
-        </form>
+        
         <hr style="color: blue">
         <div class="myProject">나의 프로젝트</div>
         <div th:if="${!#lists.isEmpty(board)}" th:each="board: ${board}">
