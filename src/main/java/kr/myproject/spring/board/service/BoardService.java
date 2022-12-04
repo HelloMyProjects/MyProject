@@ -37,4 +37,9 @@ public class BoardService {
 		Optional<Board> board = repository.findById(id);
 		return board;
 	}
+	
+	public List<Board> findByMember(String member){
+		List<Board> board = repository.findByMember(member);
+		return board;
+	}
 }

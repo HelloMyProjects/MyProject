@@ -21,6 +21,10 @@ public class MemberService implements UserDetailsService {
 	
 	private final MemberRepository memberRepository;
 	
+	public void save(Member member) {
+		memberRepository.save(member);
+	}
+	
 	public Member saveMember(Member member) {
 		validateDuplicateMember(member);
 		return memberRepository.save(member);

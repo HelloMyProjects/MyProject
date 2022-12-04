@@ -105,6 +105,7 @@
             		var title = $(".project-title");
             		var info = $(".project-simpleinfo");
             		var my_contents = $('#summernote');
+            		
             		if(!form1[0].value){
             			title.focus();
             		} 
@@ -112,7 +113,7 @@
             			info.focus();
             		}
             		if (my_contents.summernote('isEmpty')) {
-            			my_contents.focus();
+            			my_contents.summernote({focus:true});
                     }
             	}else{
     	            const reg = /<[^>]*>?/g

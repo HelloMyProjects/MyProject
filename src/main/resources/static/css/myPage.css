@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.myProject {
+	font-weight: bold;
+}
+
+.myproject-list {
+	list-style: none;
+	margin-left: -30px;
+	padding-top: 5px;
+	list-style: none;
+}
+
+.myproject-href {
+	color: #6CA0F5;
+}
+
+.myproject-href:hover {
+	color: red;
+}
+
+.myproject-href:hover>.heartIcon {
+	color: red;
+}
+
+.myinfos{
+	border: none;
+}
+
+.github-url{
+	width:1000px;
+}
+
+.info-save{
+	
+}

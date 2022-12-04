@@ -12,6 +12,7 @@
 
 .container_frame{
 	width: 1450px;
+	min-height: 1000px;
     margin: 0 auto;
     padding: 0 2rem;
     padding-top: 100px;

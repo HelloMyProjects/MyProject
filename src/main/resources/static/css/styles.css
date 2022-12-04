@@ -23,13 +23,15 @@ body {
     margin-left: 200px;
     margin-right: 200px;
 } */
-@import "login.css";
-@import "bootstrap.css";
 
+@import "bootstrap.css";
 @import "common.css";
+
+@import "login.css";
 @import "boardWrite.css";
 @import "picture.css";
 @import "board.css";
+@import "myPage.css";
 
 .modal-project-title{
 	color: black;
@@ -40,3 +42,6 @@ body {
 	color: #a2a3a6;
 }
 
+a{
+	text-decoration-line: none;
+}

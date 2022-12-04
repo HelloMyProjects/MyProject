@@ -1,7 +1,14 @@
 package kr.myproject.spring.member.controller;
 
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,19 +16,68 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.myproject.spring.board.entity.Board;
+import kr.myproject.spring.board.service.BoardService;
 import kr.myproject.spring.member.dto.MemberFormDto;
 import kr.myproject.spring.member.entity.Member;
 import kr.myproject.spring.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
 	
 	private final MemberService memberService;
+	private final BoardService boardService;
 	private final PasswordEncoder passwordEncoder;
+	
+	@GetMapping(value = "/myPage")
+	public String myPage(Principal principal ,Model model) {
+		Member member = memberService.findByEmail(principal.getName());
+		
+		List<Board> board = boardService.findByMember(member.getName());
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>"+board);
+		model.addAttribute("member", member);
+		model.addAttribute("board", board);
+		return "member/myPage";
+	}
+	
+	@GetMapping(value = "/myPage_modify")
+	public String myPage_modify(Principal principal ,Model model) {
+		Member member = memberService.findByEmail(principal.getName());
+		
+		List<Board> board = boardService.findByMember(member.getName());
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>"+board);
+		model.addAttribute("member", member);
+		model.addAttribute("board", board);
+		return "member/myPage_modify";
+	}
+	
+	@PostMapping(value = "/myPage")
+	public String myPageinfo(Principal principal, Model model, 
+			@RequestParam("myinfo") String myinfo, @RequestParam("giturl") String giturl) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>infos : "+myinfo);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>infos : "+principal.getName());
+		Member member = memberService.findByEmail(principal.getName());
+		List<Board> board = boardService.findByMember(member.getName());
+		
+		member.setMyinfo(myinfo);
+		member.setGiturl(giturl);
+		memberService.save(member);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("board", board);
+		
+		
+		
+		return "member/myPage";
+	}
 	
 	// 회원가입 페이지 연결
 	@GetMapping(value = "/new")

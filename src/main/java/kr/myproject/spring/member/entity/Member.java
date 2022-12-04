@@ -38,6 +38,10 @@ public class Member {
 	
 	private String dept;
 	
+	private String myinfo;
+	
+	private String giturl;
+	
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
