@@ -3,6 +3,7 @@ package kr.myproject.spring.member.controller;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -13,8 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +50,17 @@ public class MemberController {
 		model.addAttribute("member", member);
 		model.addAttribute("board", board);
 		return "member/myPage";
+	}
+	
+	@PatchMapping("/myPage")
+	public @ResponseBody ResponseEntity deleteAdmin(@RequestBody Map<String, Long> id, Model model) {
+
+		Long project_id = id.get("id");
+		System.out.println("===========>" + project_id);
+		
+		boardService.deleteById(project_id);
+		
+		return new ResponseEntity<Map>(id, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/myPage_modify")

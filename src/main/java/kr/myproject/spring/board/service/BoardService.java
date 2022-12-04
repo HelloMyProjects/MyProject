@@ -42,4 +42,8 @@ public class BoardService {
 		List<Board> board = repository.findByMember(member);
 		return board;
 	}
+	
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+	}
 }
