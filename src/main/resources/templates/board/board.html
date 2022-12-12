@@ -11,7 +11,8 @@
 							th:each="board : ${board}">
 						<div class="picture_list_img">
 						<a class="open-modal project-info" href="/board/boardDetail?id=" th:attrappend="href=${board.id}">
-							<img th:src="${board.photo}" class="img-fluid" >
+							<img th:if="${!#strings.isEmpty(board.photo)}" th:src="${board.photo}" class="img-fluid" >
+							<img th:if="${#strings.isEmpty(board.photo)}" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..."  class="img-fluid" >
 							<h5 class="project-title" th:text="${board.title}"></h5>
 						</a>
 						</div>

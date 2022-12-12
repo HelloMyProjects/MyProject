@@ -56,6 +56,11 @@ public class MemberService implements UserDetailsService {
 		return list;
 	}
 
+	public String findEmail(String member) {
+		Member members = memberRepository.findByName(member);
+		return members.getEmail();
+	}
+
 //	public List<Member> findByRole(Role role) {
 //		List<Member> list = memberRepository.findByRole(role);
 //		return list;

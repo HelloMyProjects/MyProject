@@ -89,8 +89,6 @@ public class MemberController {
 		model.addAttribute("member", member);
 		model.addAttribute("board", board);
 		
-		
-		
 		return "member/myPage";
 	}
 	

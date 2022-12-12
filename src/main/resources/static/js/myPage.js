@@ -27,7 +27,7 @@ function deleteAdmin(jsondata) {
 		async: true
 	}).done(function(result, status) {
 		console.log(status);
-		alert("관리자 권한이 삭제되었습니다.");
+		alert("프로젝트가 삭제되었습니다.");
 		location.reload();
 	}).fail(function(request, status, error) {
 		alert("update 에러 발생 : " + error + ",  " + request);

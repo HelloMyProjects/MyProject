@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+      
+<head>
+	<script th:inline="javascript">
+		const board = [[${board}]]; 
+		var textsss = "";
+		$(document).ready(function() {
+			$("#summernote").summernote('code', board.contents);
+		  $("#summernote").summernote({
+	 	    	placeholder: '입력해 주세요',
+	 	    	//width :1000,
+		        minHeight: 500,
+		        maxHeight: null,
+		        focus: true, 
+		        lang : 'ko-KR',
+		        toolbar: [
+				    // 글꼴 설정
+				    ['fontname', ['fontname']],
+				    // 글자 크기 설정
+				    ['fontsize', ['fontsize']],
+				    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    // 글자색
+				    ['color', ['forecolor','color']],
+				    // 표만들기
+				    ['table', ['table']],
+				    // 글머리 기호, 번호매기기, 문단정렬
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    // 줄간격
+				    ['height', ['height']],
+				    // 그림첨부, 링크만들기, 동영상첨부
+				    ['insert',['picture']],
+				    //'link','video'
+				  ],
+				  // 추가한 글꼴
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+				 // 추가한 폰트사이즈
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+				callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+					/* onImageUpload : function(files) {
+						uploadSummernoteImageFile(files[0],this);
+					},
+					onPaste: function (e) {
+						var clipboardData = e.originalEvent.clipboardData;
+						if (clipboardData && clipboardData.items && clipboardData.items.length) {
+							var item = clipboardData.items[0];
+							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+								e.preventDefault();
+							}
+						}
+					} */
+					onChange:function(contents, $editable){ //텍스트 글자수 및 이미지등록개수
+						console.log(contents);
+		                setContentsLength(contents, 0);
+		            }
+				}
+				});
+		});
+		function setContentsLength(str, index) {
+		    var status = false;
+		    var textCnt = 0; //총 글자수
+		    var maxCnt = 1000; //최대 글자수
+		    var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기
+		    textsss = editorText;
+		    
+		    editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거
+		    
+		    editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거
+
+	        textCnt = editorText.length;
+		    if(maxCnt > 0) {
+	        	if(textCnt > maxCnt) {
+	                status = true;
+	        	}
+		    }
+			console.log(textCnt);
+		    if(status) {
+	        	var msg = "등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다. / 현재 글자수 : "+textCnt+"자";
+	        	console.log(msg);
+		    }
+		}
+		
+		//에디터 내용 텍스트 제거
+		function f_SkipTags_html(input, allowed) {
+			// 허용할 태그는 다음과 같이 소문자로 넘겨받습니다. (<a><b><c>)
+		    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+		    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+		    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+		    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+		        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+		    });
+		}
+		
+		$(function(){
+	        $('#submit').on("click",function () {
+	            var form1 = $("#form").serializeArray(false);
+	            var form2 = $("#form").serialize();
+	            var contents = form1[2].value;
+	            console.log(form1);
+	            //[0]: title , [1] : simpleinfo, [2] : contents
+            	if(!form1[0].value||!form1[1].value||!form1[2].value){
+            		alert("내용을 모두 입력해주세요.");
+            		var title = $(".project-title");
+            		var info = $(".project-simpleinfo");
+            		var my_contents = $('#summernote');
+            		
+            		if(!form1[0].value){
+            			title.focus();
+            		} 
+            		else if(!form1[1].value){
+            			info.focus();
+            		}
+            		if (my_contents.summernote('isEmpty')) {
+            			my_contents.summernote({focus:true});
+                    }
+            	}else{
+    	            const reg = /<[^>]*>?/g
+    	        	var text = contents.replace(reg," ");	
+    	            form2 += "&text="+ textsss;
+    	            form2 += "&id=" + board.id;
+    	            console.log(form2);
+    	            $.ajax({
+    	                type: "PATCH",
+    	                url: "/manager/boardModify",
+    	                data: form2,
+    	                dataType: 'json',
+    	                success: function (form2) {
+    	                    alert("success");
+    	                    console.log(form2);
+    	                    window.location.href = "/board/board";
+    	                },
+    	                error: function (request, status, error) {
+    	                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
+    	                }
+    	            });
+            	}
+	            
+	        });
+	    });
+		
+		
+		
+		
+		/**
+		* 이미지 파일 업로드
+		*/
+		function uploadSummernoteImageFile(file, editor) {
+			data = new FormData();
+			data.append("file", file);
+			console.log(data);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "/uploadSummernoteImageFile",
+				contentType : false,
+				processData : false,
+				enctype : 'multipart/form-data',
+				success : function(data) {
+	            	//항상 업로드된 파일의 url이 있어야 한다.
+					$(editor).summernote('insertImage', data.url);
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		}
+	</script>
+
+</head>
+<!-- 여기서부터 content 붙여넣기 -->
+	<div layout:fragment="content">
+	    	<form id="form" name="form" method="post" action="/board/boardInsert" 
+	    	enctype="multipart/form-data">
+	    		
+	    		<table class="board_detail">
+					<tr>
+						<td>제목</td>
+						<td><input type="text" class="project-title" id="title" name="title" th:value="${board.title}"/></td>
+					</tr>
+					<tr>
+						<td>작성자</td>
+						<td th:text = "${username}"></td>
+					</tr>
+					<tr>
+						<td>한줄 소개</td>
+						<td><input type="text" class="project-simpleinfo" id="simpleInfo" name="simpleInfo" th:value="${board.simpleInfo}"/></td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<textarea id="summernote" class="project-contents" name="contents" ></textarea>
+						</td>
+						
+					</tr>
+					
+				</table>
+				<div class="filechooser">
+					<!-- <span>대표 사진 : </span>
+					<input type="file" id="files" name="files" multiple="multiple"> -->
+					<button type="button" id="submit" value="저장" class="btn btn-outline-primary">저장</button>
+				</div>
+        </form>
+        
+    </div>
+
+	
+	
+	    
+	
+</html>

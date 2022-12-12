@@ -14,7 +14,8 @@
         <h2 th:text="${member.name}"></h2>
         <div th:text="${member.email}"></div>
         <div th:text="${member.myinfo}"></div>
-        <a th:href = "${member.giturl}" >
+        <span>link :  </span>
+        <a th:href = "${member.giturl}" target="_blank">
         	<i class="fa-solid fa-link"></i>
         </a>
         

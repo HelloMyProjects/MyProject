@@ -9,7 +9,7 @@ import kr.myproject.spring.board.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long>{ // Board 엔티티
 	
-	List<Board> findFirst7ByOrderByIdDesc();
+	List<Board> findFirst6ByOrderByIdDesc();
 	
 	List<Board> findByMember(String member);
 }

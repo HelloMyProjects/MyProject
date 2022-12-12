@@ -29,7 +29,7 @@ public class BoardService {
 	}
 
 	public List<Board> findFirst4ByOrderByIdDesc() {
-		List<Board> board = repository.findFirst7ByOrderByIdDesc();
+		List<Board> board = repository.findFirst6ByOrderByIdDesc();
 		return board;
 	}
 
@@ -46,4 +46,5 @@ public class BoardService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
 }
