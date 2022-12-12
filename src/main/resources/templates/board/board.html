@@ -20,7 +20,16 @@
 				</div>
 			<!-- </div> -->
 		</div>
-        
+        <div class="paging-block paging-section">
+			<th:block  th:each="page:${#numbers.sequence(startPage,endPage)}">
+				<div class="paging-numbers">
+					<a th:if="${page != nowPage}"
+					th:href="@{/board/board(page=${page-1})}" th:text="${page}"></a>
+					<strong th:if="${page==nowPage}" th:text="${page}" style="color: red"></strong>
+				</div>
+				
+			</th:block>
+		</div>
     </div>
 
 </html>

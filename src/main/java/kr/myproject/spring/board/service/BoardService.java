@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import kr.myproject.spring.board.entity.Board;
 import kr.myproject.spring.board.repository.BoardRepository;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class BoardService {
@@ -18,6 +19,10 @@ public class BoardService {
 	public List<Board> findAll(){
 		List<Board> board = repository.findAll();
 		return board;
+	}
+	
+	public Page<Board> findPageAll(Pageable pageable){
+		return repository.findAll(pageable);
 	}
 	
 	public void boardInsert(Board list) {
